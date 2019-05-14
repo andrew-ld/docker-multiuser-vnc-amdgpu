@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  vnc-xfce:
+    build:
+        context: .
+
+    volumes:
+      - /dev/shm:/dev/shm
+      - data:/home
+      
+    ports:
+      - "5900:5900"
+
+    devices:
+        - "/dev/kfd:/dev/kfd"
+        - "/dev/dri/:/dev/dri/"
+
+    group_add:
+      - video
+        
+volumes:
+    data:
+        driver: local-persist
+        driver_opts:
+            mountpoint: /data
